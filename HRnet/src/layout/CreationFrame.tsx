@@ -1,6 +1,6 @@
 import React from 'react';
 import Capsule from './Capsule';
-import Creation from '../features/Creation';
+import Creation from '../features/creation/Creation';
 
 
 const CreationFrame : React.FC = () => {

@@ -1,11 +1,12 @@
 import React from 'react';
+import './capsule.scss';
 
 const Footer : React.FC = () => {
 
   return (
-    <>
-      Header
-    </>
+    <div className='footer'>
+      <div className='footer__logo'> Logo Footer </div>
+    </div>
   )
 }
 
