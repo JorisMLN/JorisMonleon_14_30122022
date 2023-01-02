@@ -4,8 +4,26 @@ import './capsule.scss';
 
 
 const Header : React.FC = () => {
+  const [isCreation, setIsCreation] = useState<boolean>(true);
   const navigate = useNavigate();
+
+  const toView = () => {
+    navigate('/display');
+  }
+
+  const toCreate = () => {
+    navigate('/');
+  }
  
+  useEffect(() => {
+    const actualPath : string = document.location.href;
+
+    if(actualPath === 'http://127.0.0.1:5173/'){
+      setIsCreation(true);
+    } else {
+      setIsCreation(false);
+    }
+  }, [])
  
   return (
     <div className='header'>
@@ -14,7 +32,12 @@ const Header : React.FC = () => {
       </div>
 
       <nav>
-        <button> View Current Employees </button>
+        {
+          isCreation === true ? 
+            <button onClick={() => toView()}> View Current Employees </button> 
+            : 
+          <button onClick={() => toCreate()}> Back to Creation page </button>
+        }
         <button> Sign Out </button>
       </nav>
     </div>
