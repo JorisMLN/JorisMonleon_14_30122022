@@ -53,27 +53,27 @@ const Creation : React.FC = () => {
 
           <div>
             <label>First Name: </label><br/>
-            <input ref={firstNameRef} type="text" name="name" id="name" required></input>
+            <input ref={firstNameRef} type="text" value="jo" name="name" id="name" required></input>
           </div>
 
            <div>
             <label>Last Name: </label><br/>
-            <input ref={lastNameRef} type="text" name="name" id="name" required></input>
+            <input ref={lastNameRef} type="text" value="jo" name="name" id="name" required></input>
           </div>
 
           <div>
             <label>Date of birth: </label><br/>
-            <input ref={birthRef} type="text" name="name" id="name" required></input>
+            <input ref={birthRef} type="text" value="jo" name="name" id="name" required></input>
           </div>
 
           <div>
             <label>Start Date: </label><br/>
-            <input ref={startDateRef} type="text" name="name" id="name" required></input>
+            <input ref={startDateRef} type="text" value="jo" name="name" id="name" required></input>
           </div>
 
           <div>
             <label>Department: </label><br/>
-            <input ref={departmentRef} type="text" name="name" id="name" required></input>
+            <input ref={departmentRef} type="text" value="jo" name="name" id="name" required></input>
           </div>
         </div>
 
@@ -82,29 +82,29 @@ const Creation : React.FC = () => {
 
           <div>
             <label>Street: </label><br/>
-            <input ref={streetRef} type="text" name="name" id="name" required></input>
+            <input ref={streetRef} type="text" value="jo" name="name" id="name" required></input>
           </div>
 
           <div>
             <label>City: </label><br/>
-            <input ref={cityRef} type="text" name="name" id="name" required></input>
+            <input ref={cityRef} type="text" value="jo" name="name" id="name" required></input>
           </div>
 
           <div>
             <label>State: </label><br/>
-            <input ref={stateRef} type="text" name="name" id="name" required></input>
+            <input ref={stateRef} type="text" value="jo" name="name" id="name" required></input>
           </div>
 
           <div>
             <label>Zipcode: </label><br/>
-            <input ref={zipRef} type="text" name="name" id="name" required></input>
+            <input ref={zipRef} type="text" value="jo" name="name" id="name" required></input>
           </div>
         </div>
       </form>
 
       <button onClick={() => save()}> Save </button>
-      
-      {openModal ===  true ? <ModalManager /> : null}
+
+      <ModalManager toHandle={openModal} />
     </div>
   )
 }

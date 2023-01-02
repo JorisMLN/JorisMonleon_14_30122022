@@ -4,7 +4,7 @@ const Display : React.FC = () => {
 
   return (
     <>
-      Creation
+      Display
     </>
   )
 }
