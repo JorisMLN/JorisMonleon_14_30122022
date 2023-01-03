@@ -20,7 +20,7 @@ const ModalManager = ({toHandle} : any) => {
           </div>
         </div>
         :
-        'test'
+        null
       }
     </>
   )
