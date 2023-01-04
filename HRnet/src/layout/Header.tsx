@@ -18,7 +18,7 @@ const Header : React.FC = () => {
   useEffect(() => {
     const actualPath : string = document.location.href;
 
-    if(actualPath === 'http://127.0.0.1:5173/'){
+    if(actualPath === 'http://127.0.0.1:5173/' || actualPath === 'http://127.0.0.1:5174/'){
       setIsCreation(true);
     } else {
       setIsCreation(false);

@@ -1,4 +1,11 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
 
 // Define a type for the slice state
 export interface EmployeeState {
@@ -49,11 +56,15 @@ const employeeSlice = createSlice({
   }
 });
 
+
+const persistedReducer = persistReducer(persistConfig, employeeSlice.reducer)
+
 const store = configureStore({
-  reducer: employeeSlice.reducer
+  reducer: persistedReducer,
 })
 
 store.subscribe(() => console.log(store.getState()));
 
 export const { storeEmployee, clearStore } = employeeSlice.actions;
+export const persistor = persistStore(store)
 export default store;
