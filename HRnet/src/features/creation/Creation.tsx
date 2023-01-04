@@ -1,9 +1,13 @@
 import React, { LegacyRef, useRef, useState } from 'react';
 import ModalManager from './modalManager';
 import './creation.scss'
+import { useAppDispatch } from '../reducer/hook';
+import { storeEmployee } from '../reducer/employeeReducer';
+
 
 const Creation : React.FC = () => {
-  const [openModal, setOpenModal] = useState<boolean>(false)
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
 
   // profil ref
   const firstNameRef : LegacyRef<HTMLInputElement> | any | undefined = useRef();
@@ -36,10 +40,22 @@ const Creation : React.FC = () => {
       setOpenModal(false);
     } else {
 
+      console.log(firstName, lastName, birth, startDate, department, street, city, state, zip, openModal);
+      dispatch(storeEmployee({ 
+        firstName: firstName, 
+        lastName: lastName, 
+        startDate: birth, 
+        department: startDate, 
+        dateOfBirth: department, 
+        street: street, 
+        city: city, 
+        state: state, 
+        zipCode: zip 
+        })
+      );
+
       setOpenModal(true);
     }
-
-    console.log(firstName.length, lastName, birth, startDate, department, street, city, state, zip, openModal);
   }
 
   return (
@@ -53,27 +69,27 @@ const Creation : React.FC = () => {
 
           <div>
             <label>First Name: </label><br/>
-            <input ref={firstNameRef} type="text" value="jo" name="name" id="name" required></input>
+            <input ref={firstNameRef} type="text" value="jor1" name="name" id="name" required></input>
           </div>
 
            <div>
             <label>Last Name: </label><br/>
-            <input ref={lastNameRef} type="text" value="jo" name="name" id="name" required></input>
+            <input ref={lastNameRef} type="text" value="mon1" name="name" id="name" required></input>
           </div>
 
           <div>
             <label>Date of birth: </label><br/>
-            <input ref={birthRef} type="text" value="jo" name="name" id="name" required></input>
+            <input ref={birthRef} type="text" value="22/33/4455" name="name" id="name" required></input>
           </div>
 
           <div>
             <label>Start Date: </label><br/>
-            <input ref={startDateRef} type="text" value="jo" name="name" id="name" required></input>
+            <input ref={startDateRef} type="text" value="12/3/2023" name="name" id="name" required></input>
           </div>
 
           <div>
             <label>Department: </label><br/>
-            <input ref={departmentRef} type="text" value="jo" name="name" id="name" required></input>
+            <input ref={departmentRef} type="text" value="dev" name="name" id="name" required></input>
           </div>
         </div>
 
@@ -97,12 +113,12 @@ const Creation : React.FC = () => {
 
           <div>
             <label>Zipcode: </label><br/>
-            <input ref={zipRef} type="text" value="jo" name="name" id="name" required></input>
+            <input ref={zipRef} type="text" value="124" name="name" id="name" required></input>
           </div>
         </div>
       </form>
 
-      <button onClick={() => save()}> Save </button>
+      <button className='saveBtn' onClick={() => save()}> Save </button>
 
       <ModalManager toHandle={openModal} />
     </div>

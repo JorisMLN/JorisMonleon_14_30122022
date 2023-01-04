@@ -38,8 +38,9 @@ const employeeSlice = createSlice({
   initialState,
   reducers: {
 
-    storeLogin: (state, action) => {
-      state.employeeList = state.employeeList + action.payload
+    storeEmployee: (state, action) => {
+      console.log(state.employeeList, action.payload)
+      state.employeeList.push(action.payload)
     },
 
     clearStore: (state, action) => {
@@ -54,5 +55,5 @@ const store = configureStore({
 
 store.subscribe(() => console.log(store.getState()));
 
-export const { storeLogin, clearStore } = employeeSlice.actions;
+export const { storeEmployee, clearStore } = employeeSlice.actions;
 export default store;
