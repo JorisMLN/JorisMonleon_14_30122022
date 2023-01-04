@@ -13,7 +13,6 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -21,6 +20,9 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
+
+import { useAppSelector } from '../reducer/hook';
+import { ListOfEmployeeState } from '../reducer/employeeReducer';
 
 interface Data {
   firstName: string
@@ -58,17 +60,19 @@ function createData(
   };
 }
 
-const rows = [
-  createData('jo1', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 123),
-  createData('jo2', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 234),
-  createData('jo3', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 234),
-  createData('jo4', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 345),
-  createData('jo5', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 456),
-  createData('jo6', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 567),
-  createData('jo7', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 678),
-  createData('jo8', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 789),
-  createData('jo9', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 890),
-];
+// const rows = [
+//   createData('jo1', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 123),
+//   createData('jo2', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 234),
+//   createData('jo3', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 234),
+//   createData('jo4', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 345),
+//   createData('jo5', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 456),
+//   createData('jo6', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 567),
+//   createData('jo7', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 678),
+//   createData('jo8', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 789),
+//   createData('jo9', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 890),
+// ];
+
+// console.log(rows);
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -278,6 +282,9 @@ export default function EnhancedTable() {
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
+  const rows = useAppSelector((state: ListOfEmployeeState) => state.employeeList);
+  console.log(rows);
+
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof Data,
@@ -290,6 +297,7 @@ export default function EnhancedTable() {
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       const newSelected = rows.map((n) => n.firstName);
+
       setSelected(newSelected);
       return;
     }
@@ -359,6 +367,7 @@ export default function EnhancedTable() {
                   .map((row, index) => {
                     const isItemSelected = isSelected(row.firstName);
                     const labelId = `enhanced-table-checkbox-${index}`;
+                    console.log(row)
 
                     return (
                       <TableRow
