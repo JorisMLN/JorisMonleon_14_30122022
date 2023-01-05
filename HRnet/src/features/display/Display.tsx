@@ -384,7 +384,6 @@ export default function EnhancedTable() {
                   </TableRow>
                 )}
               </TableBody>
-              
             </Table>
           }
           </TableContainer>

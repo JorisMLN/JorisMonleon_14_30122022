@@ -36,7 +36,7 @@ const Creation : React.FC = () => {
   const save = () => {
     const firstName : string = firstNameRef.current.value;
     const lastName : string = lastNameRef.current.value;
-    const birth : string = birthRef.current;
+    const birth : string = birthRef.current.value;
     const startDate : string = startDateRef.current.value;
     const department : string = departmentRef.current.value;
     const street : string = streetRef.current.value;
@@ -158,7 +158,7 @@ const Creation : React.FC = () => {
 
       <button className='saveBtn' onClick={() => save()}> Save </button>
 
-      <ModalManager toHandle={openModal} />
+      <ModalManager toHandle={openModal} message={'Employee Created!'} routing={'/display'}/>
     </div>
   )
 }
