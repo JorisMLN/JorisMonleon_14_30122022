@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { LegacyRef, useRef } from 'react';
 import './display.scss';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -13,12 +14,9 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
+import TextField from '@mui/material/TextField';
 import { visuallyHidden } from '@mui/utils';
 
 import { useAppSelector } from '../reducer/hook';
@@ -35,44 +33,6 @@ interface Data {
   state: string
   zipCode: number
 }
-
-function createData(
-  firstName: string,
-  lastName: string,
-  startDate: string,
-  department: string,
-  dateOfBirth: string,
-  street: string,
-  city: string,
-  state: string,
-  zipCode: number
-): Data {
-  return {
-  firstName,
-  lastName,
-  startDate,
-  department,
-  dateOfBirth,
-  street,
-  city,
-  state,
-  zipCode
-  };
-}
-
-// const rows = [
-//   createData('jo1', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 123),
-//   createData('jo2', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 234),
-//   createData('jo3', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 234),
-//   createData('jo4', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 345),
-//   createData('jo5', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 456),
-//   createData('jo6', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 567),
-//   createData('jo7', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 678),
-//   createData('jo8', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 789),
-//   createData('jo9', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 'jo', 890),
-// ];
-
-// console.log(rows);
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -184,7 +144,7 @@ interface EnhancedTableProps {
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
-  const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
+  const { order, orderBy, numSelected, rowCount, onRequestSort } =
     props;
   const createSortHandler =
     (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
@@ -220,59 +180,47 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-interface EnhancedTableToolbarProps {
-  numSelected: number;
-}
+// interface EnhancedTableToolbarProps {
+//   numSelected: number;
+// }
 
-function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
-  const { numSelected } = props;
+// function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
+//   const { numSelected } = props;
 
-  return (
-    <Toolbar
-      sx={{
-        pl: { sm: 2 },
-        pr: { xs: 1, sm: 1 },
-        ...(numSelected > 0 && {
-          bgcolor: (theme) =>
-            alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-        }),
-      }}
-    >
-      {numSelected > 0 ? (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          color="inherit"
-          variant="subtitle1"
-          component="div"
-        >
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          Current Employees
-        </Typography>
-      )}
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
-  );
-}
+//   return (
+//     <Toolbar
+//       sx={{
+//         pl: { sm: 2 },
+//         pr: { xs: 1, sm: 1 },
+//         ...(numSelected > 0 && {
+//           bgcolor: (theme) =>
+//             alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
+//         }),
+//       }}
+//     >
+//       {numSelected > 0 ? (
+//         <Typography
+//           sx={{ flex: '1 1 100%' }}
+//           color="inherit"
+//           variant="subtitle1"
+//           component="div"
+//         >
+//           {numSelected} selected
+//         </Typography>
+//       ) : (
+//         <Typography
+//           sx={{ flex: '1 1 100%' }}
+//           variant="h6"
+//           id="tableTitle"
+//           component="div"
+//         >
+//           Current Employees
+//         </Typography>
+//       )}
+      
+//     </Toolbar>
+//   );
+// }
 
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState<Order>('asc');
@@ -281,9 +229,31 @@ export default function EnhancedTable() {
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  
 
-  const rows = useAppSelector((state: ListOfEmployeeState) => state.employeeList);
-  console.log(rows);
+  let reduxRows = useAppSelector((state: ListOfEmployeeState) => state.employeeList);
+
+  const [rows, setRows] = React.useState<ListOfEmployeeState | any>(reduxRows);
+
+  const sortBySearch = (event: any) => {
+    console.log(event.target.value);
+  
+    const selectedRows = reduxRows.filter(function (elm){
+      if (elm.firstName.indexOf(event.target.value) > -1) {
+        return true;
+
+      } else if (elm.lastName.indexOf(event.target.value) > -1) {
+        return true;
+
+      }
+    })
+
+    // console.log(selectedRows)
+    setRows(selectedRows);
+  }
+
+  // React.useEffect(() => {
+  // }, [])
 
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -296,7 +266,7 @@ export default function EnhancedTable() {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.firstName);
+      const newSelected = rows.map((n: any) => n.firstName);
 
       setSelected(newSelected);
       return;
@@ -346,13 +316,29 @@ export default function EnhancedTable() {
     <div className='display'>
       <Box sx={{ width: '90%', height: '100%', marginTop: '10px' }}>
         <Paper sx={{ width: '100%', mb: 2 }}>
-          <EnhancedTableToolbar numSelected={selected.length} />
+          <Toolbar>
+            <Typography
+              sx={{ flex: '1 1 100%' }}
+              variant="h6"
+              id="tableTitle"
+              component="div"
+            >
+              Current Employees
+            </Typography>
+            <TextField size="small" id="outlined-basic" label="Search" variant="outlined" onChange={sortBySearch}/>
+          </Toolbar>
           <TableContainer>
+          {rows.length === 0 ? 
+            <div className='notFound'>
+              Employee not found 
+            </div>
+          :
             <Table
               sx={{ minWidth: 750 }}
               aria-labelledby="tableTitle"
               size={dense ? 'small' : 'medium'}
             >
+             
               <EnhancedTableHead
                 numSelected={selected.length}
                 order={order}
@@ -361,18 +347,15 @@ export default function EnhancedTable() {
                 onRequestSort={handleRequestSort}
                 rowCount={rows.length}
               />
+             
               <TableBody>
                 {stableSort(rows, getComparator(order, orderBy))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row, index) => {
+                  .map((row : any) => {
                     const isItemSelected = isSelected(row.firstName);
-                    const labelId = `enhanced-table-checkbox-${index}`;
-                    console.log(row)
-
                     return (
                       <TableRow
                         hover
-                        onClick={(event) => handleClick(event, row.firstName)}
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
@@ -401,7 +384,9 @@ export default function EnhancedTable() {
                   </TableRow>
                 )}
               </TableBody>
+              
             </Table>
+          }
           </TableContainer>
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}

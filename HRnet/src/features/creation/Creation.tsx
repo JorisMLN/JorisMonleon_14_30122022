@@ -1,6 +1,11 @@
 import React, { LegacyRef, useRef, useState } from 'react';
 import ModalManager from './modalManager';
 import './creation.scss'
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useAppDispatch } from '../reducer/hook';
 import { storeEmployee } from '../reducer/employeeReducer';
 
@@ -8,6 +13,13 @@ import { storeEmployee } from '../reducer/employeeReducer';
 const Creation : React.FC = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+
+  const [stateSelected, setStateSelected] = React.useState<string>('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setStateSelected(event.target.value as string);
+    console.log(stateSelected)
+  };
 
   // profil ref
   const firstNameRef : LegacyRef<HTMLInputElement> | any | undefined = useRef();
@@ -19,28 +31,28 @@ const Creation : React.FC = () => {
   // adress ref
   const streetRef : LegacyRef<HTMLInputElement> | any | undefined = useRef();
   const cityRef : LegacyRef<HTMLInputElement> | any | undefined = useRef();
-  const stateRef : LegacyRef<HTMLInputElement> | any | undefined = useRef();
   const zipRef : LegacyRef<HTMLInputElement> | any | undefined = useRef();
 
   const save = () => {
     const firstName : string = firstNameRef.current.value;
     const lastName : string = lastNameRef.current.value;
-    const birth : string = birthRef.current.value;
+    const birth : string = birthRef.current;
     const startDate : string = startDateRef.current.value;
     const department : string = departmentRef.current.value;
     const street : string = streetRef.current.value;
     const city : string = cityRef.current.value;
-    const state : string = stateRef.current.value;
     const zip : string = zipRef.current.value;
 
+    console.log(birth)
+
     if(firstName.length === 0 || lastName.length === 0 || birth.length === 0 || startDate.length === 0 || 
-      department.length === 0 || street.length === 0 || city.length === 0 || state.length === 0 || zip.length === 0){
+      department.length === 0 || street.length === 0 || city.length === 0 || stateSelected.length === 0 || zip.length === 0){
 
       console.log('empty');
       setOpenModal(false);
     } else {
 
-      console.log(firstName, lastName, birth, startDate, department, street, city, state, zip, openModal);
+      console.log(firstName, lastName, birth, startDate, department, street, city, stateSelected, zip, openModal);
       dispatch(storeEmployee({ 
         firstName: firstName, 
         lastName: lastName, 
@@ -49,7 +61,7 @@ const Creation : React.FC = () => {
         dateOfBirth: department, 
         street: street, 
         city: city, 
-        state: state, 
+        state: stateSelected, 
         zipCode: zip 
         })
       );
@@ -80,6 +92,18 @@ const Creation : React.FC = () => {
           <div>
             <label>Date of birth: </label><br/>
             <input ref={birthRef} type="text" name="name" id="name" required></input>
+
+            {/* <TextField
+              ref={birthRef}
+              id="date"
+              label="Birthday"
+              type="date"
+              defaultValue="01-01-24"
+              sx={{ width: 300, marginBottom: '0px' }}
+              InputLabelProps={{
+                shrink: true,
+              }}
+            /> */}
           </div>
 
           <div>
@@ -107,8 +131,22 @@ const Creation : React.FC = () => {
           </div>
 
           <div>
-            <label>State: </label><br/>
-            <input ref={stateRef} type="text" name="name" id="name" required></input>
+            <Box sx={{ minWidth: 300 , backgroundColor: '#2b2a33'}}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">State</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={stateSelected}
+                  label="State"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={'Occitanie'}>Occitanie</MenuItem>
+                  <MenuItem value={'Provence'}>Provence</MenuItem>
+                  <MenuItem value={'Aquitaine'}>Aquitaine</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
           </div>
 
           <div>
