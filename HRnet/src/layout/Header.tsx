@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
 import './capsule.scss';
 
 
@@ -34,11 +35,11 @@ const Header : React.FC = () => {
       <nav>
         {
           isCreation === true ? 
-            <button onClick={() => toView()}> View Current Employees </button> 
+            <Button className='btn' variant="contained" onClick={() => toView()}> View Current Employees </Button> 
             : 
-          <button onClick={() => toCreate()}> Back to Creation page </button>
+          <Button className='btn' variant="contained" onClick={() => toCreate()}> Back to Creation page </Button>
         }
-        <button> Sign Out </button>
+        <Button className='btn' variant="contained"> Sign Out </Button>
       </nav>
     </div>
   )
