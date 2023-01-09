@@ -4,6 +4,7 @@ import './creation.scss'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
+import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useAppDispatch } from '../reducer/hook';
@@ -11,7 +12,7 @@ import { storeEmployee } from '../reducer/employeeReducer';
 
 
 const Creation : React.FC = () => {
-  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(true);
   const dispatch = useAppDispatch();
 
   const [stateSelected, setStateSelected] = React.useState<string>('');
@@ -156,9 +157,27 @@ const Creation : React.FC = () => {
         </div>
       </form>
 
-      <button className='saveBtn' onClick={() => save()}> Save </button>
+      <Button variant="contained" className='saveBtn' onClick={() => save()}> Save </Button>
 
-      <ModalManager toHandle={openModal} message={'Employee Created!'} routing={'/display'}/>
+      <ModalManager 
+        isOpen={openModal} 
+        title={'Employee Creation Form'} 
+        isRouter={true}
+        routerTitle={'To employee display page'}
+        routerLink={'/display'}
+        size={'small'}
+      >
+        <div className='children'>
+          
+          <div> Employee Created! </div>
+          <div> Employee Created! </div>
+          <div> Employee Created! </div>
+          <div> Employee Created! </div>
+          <div> Employee Created! </div>
+
+        </div>
+      </ModalManager>
+
     </div>
   )
 }
