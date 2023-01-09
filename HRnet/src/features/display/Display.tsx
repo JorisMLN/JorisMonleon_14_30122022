@@ -180,47 +180,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-// interface EnhancedTableToolbarProps {
-//   numSelected: number;
-// }
-
-// function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
-//   const { numSelected } = props;
-
-//   return (
-//     <Toolbar
-//       sx={{
-//         pl: { sm: 2 },
-//         pr: { xs: 1, sm: 1 },
-//         ...(numSelected > 0 && {
-//           bgcolor: (theme) =>
-//             alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
-//         }),
-//       }}
-//     >
-//       {numSelected > 0 ? (
-//         <Typography
-//           sx={{ flex: '1 1 100%' }}
-//           color="inherit"
-//           variant="subtitle1"
-//           component="div"
-//         >
-//           {numSelected} selected
-//         </Typography>
-//       ) : (
-//         <Typography
-//           sx={{ flex: '1 1 100%' }}
-//           variant="h6"
-//           id="tableTitle"
-//           component="div"
-//         >
-//           Current Employees
-//         </Typography>
-//       )}
-      
-//     </Toolbar>
-//   );
-// }
 
 export default function EnhancedTable() {
   const [order, setOrder] = React.useState<Order>('asc');
@@ -242,10 +201,37 @@ export default function EnhancedTable() {
       if (elm.firstName.indexOf(event.target.value) > -1) {
         return true;
 
-      } else if (elm.lastName.indexOf(event.target.value) > -1) {
+      }
+      
+      if (elm.lastName.indexOf(event.target.value) > -1) {
         return true;
 
       }
+
+      if (elm.department.indexOf(event.target.value) > -1) {
+        return true;
+
+      }
+
+      if (elm.street.indexOf(event.target.value) > -1) {
+        return true;
+
+      }
+
+      if (elm.city.indexOf(event.target.value) > -1) {
+        return true;
+
+      }
+
+      if (elm.state.indexOf(event.target.value) > -1) {
+        return true;
+
+      }
+
+      // if (elm.zipCode.indexOf(event.target.value) > -1) {
+      //   return true;
+
+      // }
     })
 
     // console.log(selectedRows)

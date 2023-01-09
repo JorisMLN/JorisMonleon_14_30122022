@@ -12,7 +12,7 @@ import { storeEmployee } from '../reducer/employeeReducer';
 
 
 const Creation : React.FC = () => {
-  const [openModal, setOpenModal] = useState<boolean>(true);
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   const [stateSelected, setStateSelected] = React.useState<string>('');
@@ -58,8 +58,8 @@ const Creation : React.FC = () => {
         firstName: firstName, 
         lastName: lastName, 
         startDate: birth, 
-        department: startDate, 
-        dateOfBirth: department, 
+        department: department, 
+        dateOfBirth: startDate, 
         street: street, 
         city: city, 
         state: stateSelected, 
