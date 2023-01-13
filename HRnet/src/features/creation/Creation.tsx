@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useAppDispatch } from '../reducer/hook';
 import { storeEmployee } from '../reducer/employeeReducer';
+import Paper from '@mui/material/Paper';
 
 
 const Creation : React.FC = () => {
@@ -78,33 +79,35 @@ const Creation : React.FC = () => {
 
   return (
     <div className='creation'>
-      <h1> Create Employee </h1>
-
+      <Paper elevation={3} className='title'>
+        <h1> Create Employee </h1>
+      </Paper>
       <form className='form'>
-        <div className='form__left'>
+
+        <Paper elevation={6} className='form__left'>
           <h2>Profil</h2>
 
-          <div>
+          <div className='blocInput'>
             <label>First Name: </label><br/>
-            <input ref={firstNameRef} type="text" name="name" id="name" required></input>
+            <input ref={firstNameRef} type="text" name="name" id="firstName" required></input>
           </div>
 
-           <div>
+           <div className='blocInput'>
             <label>Last Name: </label><br/>
-            <input ref={lastNameRef} type="text" name="name" id="name" required></input>
+            <input ref={lastNameRef} type="text" name="name" id="lastName" required></input>
           </div>
 
-          <div>
+          <div className='blocInput'>
             <label>Date of birth: </label><br/>
-            <input ref={birthRef} type="date" name="name" id="name" required></input>
+            <input ref={birthRef} type="date" name="name" id="birth" required></input>
           </div>
 
-          <div>
+          <div className='blocInput'>
             <label>Start Date: </label><br/>
-            <input ref={startDateRef} type="date" name="name" id="name" required></input>
+            <input ref={startDateRef} type="date" name="name" id="startDate" required></input>
           </div>
 
-          <div>
+          <div className='blocInput' id="department">
             <Box sx={{height: 46, minWidth: 300 , backgroundColor: '#2b2a33', border: '1px solid #8f8f9d'}}>
               <FormControl fullWidth>
                 <InputLabel sx={{ color: 'white'}} id="demo-simple-select-label">Department</InputLabel>
@@ -125,21 +128,21 @@ const Creation : React.FC = () => {
               </FormControl>
             </Box>
           </div>
-        </div>
+        </Paper>
 
-        <div className='form__right'>
+        <Paper elevation={6} className='form__right'>
           <h2>Address</h2>
-          <div>
+          <div className='blocInput'>
             <label>Street: </label><br/>
             <input ref={streetRef} type="text" name="name" id="name" required></input>
           </div>
 
-          <div>
+          <div className='blocInput'>
             <label>City: </label><br/>
             <input ref={cityRef} type="text" name="name" id="name" required></input>
           </div>
 
-          <div>
+          <div className='blocInput'>
             <Box sx={{height: 46, minWidth: 300 , backgroundColor: '#2b2a33', border: '1px solid #8f8f9d'}}>
               <FormControl fullWidth>
                 <InputLabel sx={{ color: 'white'}} id="demo-simple-select-label">State</InputLabel>
@@ -159,11 +162,11 @@ const Creation : React.FC = () => {
             </Box>
           </div>
 
-          <div>
+          <div className='blocInput'>
             <label>Zipcode: </label><br/>
             <input ref={zipRef} type="number" name="name" id="name" required></input>
           </div>
-        </div>
+        </Paper>
       </form>
 
       <Button variant="contained" className='saveBtn' onClick={() => save()}> Save </Button>

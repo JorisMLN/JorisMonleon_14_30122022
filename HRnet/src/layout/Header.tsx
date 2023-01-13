@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import './capsule.scss';
+import Paper from '@mui/material/Paper';
+
 
 
 const Header : React.FC = () => {
@@ -27,9 +29,10 @@ const Header : React.FC = () => {
   }, [])
  
   return (
-    <div className='header'>
+    <Paper elevation={10} className='header'>
+  
       <div className='header__left'>
-        logo
+        <h1>HRnet</h1>
       </div>
 
       <nav>
@@ -41,7 +44,8 @@ const Header : React.FC = () => {
         }
         <Button className='btn' variant="contained"> Sign Out </Button>
       </nav>
-    </div>
+
+    </Paper>
   )
 }
 

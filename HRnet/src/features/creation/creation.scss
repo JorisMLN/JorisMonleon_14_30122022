@@ -5,19 +5,33 @@
   justify-content: space-around;
   align-items: center;
 
+  .title{
+    height: 100px;
+    width: 500px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1{
+      margin: 0px;
+      color: #474747;
+    }
+  }
+ 
+
   .form{
     width: 80%;
     height: 90%;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 
     &__left{
-      border: 1px solid white;
-      width: 48%;
+      background-color: #474747;
+      width: 40%;
       height: 90%;
-      border-radius: 5px;
 
       display: flex;
       flex-direction: column;
@@ -26,33 +40,63 @@
 
       padding-bottom: 10px;
 
-      input{
-        margin-bottom: 10px;
-        width: 300px;
-        height: 40px;
+      h2{
+        color: white;
       }
 
-      #date{
-        height: 20px;
-        margin-bottom: 0px;
+      .blocInput{
+        height: 15%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        label{
+          color: white;
+        }
+
+        input{
+          margin-bottom: 10px;
+          width: 300px;
+          height: 40px;
+        }
+      }
+
+      #department{
+        margin-top: 5px;
       }
     }
 
     &__right{
-      border: 1px solid white;
-      width: 48%;
-      height: 90%;
-      border-radius: 5px;
+      background-color: #474747;
+      width: 40%;
+      height: 80%;
 
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
       align-items: center;
 
-      input{
-        margin-bottom: 10px;
-        width: 300px;
-        height: 40px;
+      h2{
+        color: white;
+      }
+
+      .blocInput{
+        height: 20%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        label{
+          color: white;
+        }
+
+        input{
+          margin-bottom: 10px;
+          width: 300px;
+          height: 40px;
+        }
       }
     }
   }
@@ -61,7 +105,7 @@
     width: 200px;
     height: 50px;
     font-size: 20px;
-    background-color: #00bc77;
+    background-color: #1976d2;
   }
 
   .children{

@@ -1,12 +1,14 @@
 import React from 'react';
 import './capsule.scss';
+import logo from '../assets/wealthHealthLogo.jpg';
+import Paper from '@mui/material/Paper';
 
 const Footer : React.FC = () => {
 
   return (
-    <div className='footer'>
-      <div className='footer__logo'> Logo Footer </div>
-    </div>
+    <Paper elevation={10} className='footer'>
+      <img alt='logo' src={logo}></img>
+    </Paper>
   )
 }
 
