@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
-// import './capsule.scss';
+import Footer from './Footer';
+import './capsule.scss';
 
 
 interface ComponentsProps {
@@ -13,6 +14,7 @@ const Capsule : React.FC<ComponentsProps> = ({child}) => {
     <div className='capsule'>
       <Header />
       {child}
+      <Footer />
     </div>
   )
 }

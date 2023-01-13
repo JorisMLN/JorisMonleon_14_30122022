@@ -1,6 +1,6 @@
 import React from 'react';
 import Capsule from './Capsule';
-import Display from '../features/Display';
+import Display from '../features/display/Display';
 
 
 const DisplayFrame : React.FC = () => {
