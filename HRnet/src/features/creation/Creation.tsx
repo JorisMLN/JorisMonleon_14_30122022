@@ -14,7 +14,6 @@ import Paper from '@mui/material/Paper';
 
 const Creation : React.FC = () => {
   const dispatch = useAppDispatch();
-
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [stateSelected, setStateSelected] = React.useState<string>('');
   const [depSelected, setDepSelected] = React.useState<string>('');
