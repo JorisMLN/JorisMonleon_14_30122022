@@ -1,5 +1,4 @@
 import React, { LegacyRef, useRef, useState } from 'react';
-import ModalManager from './modalManager';
 import './creation.scss'
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -10,6 +9,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useAppDispatch } from '../reducer/hook';
 import { storeEmployee } from '../reducer/employeeReducer';
 import Paper from '@mui/material/Paper';
+import { JmModalOc } from 'jm-modal-oc/src/index';
 
 
 const Creation : React.FC = () => {
@@ -170,19 +170,18 @@ const Creation : React.FC = () => {
 
       <Button variant="contained" className='saveBtn' onClick={() => save()}> Save </Button>
 
-      <ModalManager
+      <JmModalOc
         isOpen={openModal} 
         title={'Employee Creation Form'}
         isRouter={true}
         routerTitle={'To employee display page'}
         routerLink={'/display'}
-        size={'medium'}
+        size={'small'}
       >
         <div className='children'>
           <div> Employee Created! </div>
         </div>
-      </ModalManager>
-
+      </JmModalOc>
     </div>
   )
 }
