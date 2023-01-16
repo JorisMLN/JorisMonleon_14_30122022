@@ -10,6 +10,7 @@ import { useAppDispatch } from '../reducer/hook';
 import { storeEmployee } from '../reducer/employeeReducer';
 import Paper from '@mui/material/Paper';
 import { JmModalOc } from 'jm-modal-oc/src/index';
+import { mockedStates } from '../../mock/mockedState';
 
 
 const Creation : React.FC = () => {
@@ -153,9 +154,10 @@ const Creation : React.FC = () => {
                   label="State"
                   onChange={handleChange}
                 >
-                  <MenuItem value={'Occitanie'}>Occitanie</MenuItem>
-                  <MenuItem value={'Provence'}>Provence</MenuItem>
-                  <MenuItem value={'Aquitaine'}>Aquitaine</MenuItem>
+                  {mockedStates.map((state) => {
+                    return <MenuItem value={state.abbreviation}>{state.name}</MenuItem>
+                  })}
+
                 </Select>
               </FormControl>
             </Box>
@@ -170,6 +172,7 @@ const Creation : React.FC = () => {
 
       <Button variant="contained" className='saveBtn' onClick={() => save()}> Save </Button>
 
+      {/** 'JorisMonleon Modal OpenClassrooms Library */}
       <JmModalOc
         isOpen={openModal} 
         title={'Employee Creation Form'}
