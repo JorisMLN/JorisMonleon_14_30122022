@@ -9,8 +9,10 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { useAppDispatch } from '../reducer/hook';
 import { storeEmployee } from '../reducer/employeeReducer';
 import Paper from '@mui/material/Paper';
-import { JmModalOc } from 'jm-modal-oc/src/index';
 import { mockedStates } from '../../mock/mockedState';
+
+// import de la modal lib
+import { JmModalOc } from 'jm-modal-oc/src/index';
 
 
 const Creation : React.FC = () => {
@@ -154,8 +156,9 @@ const Creation : React.FC = () => {
                   label="State"
                   onChange={handleChange}
                 >
-                  {mockedStates.map((state) => {
-                    return <MenuItem value={state.abbreviation}>{state.name}</MenuItem>
+
+                  {mockedStates.map((state, index) => {
+                    return <MenuItem value={state.abbreviation} key={index}>{state.name}</MenuItem>
                   })}
 
                 </Select>
