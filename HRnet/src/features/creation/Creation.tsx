@@ -108,7 +108,7 @@ const Creation : React.FC = () => {
           </div>
 
           <div className='blocInput' id="department">
-            <Box sx={{height: 46, minWidth: 300 , backgroundColor: '#2b2a33', border: '1px solid #8f8f9d'}}>
+            <Box sx={{height: 46 , backgroundColor: '#2b2a33', border: '1px solid #8f8f9d'}}>
               <FormControl fullWidth>
                 <InputLabel sx={{ color: 'white'}} id="demo-simple-select-label">Department</InputLabel>
                 <Select
@@ -143,7 +143,7 @@ const Creation : React.FC = () => {
           </div>
 
           <div className='blocInput'>
-            <Box sx={{height: 46, minWidth: 300 , backgroundColor: '#2b2a33', border: '1px solid #8f8f9d'}}>
+            <Box sx={{height: 46 , backgroundColor: '#2b2a33', border: '1px solid #8f8f9d'}}>
               <FormControl fullWidth>
                 <InputLabel sx={{ color: 'white'}} id="demo-simple-select-label">State</InputLabel>
                 <Select
